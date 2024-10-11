@@ -5,32 +5,25 @@
 {% endblock%}
 
 {% block container %}
-
+    
+    <div class="login-container">
     {% if error %}
-        <p class="alert alert-danger">{{ error }}</p>
+        <p class="alert alert-danger">⛔ {{ error }}</p>
     {% endif%}
 
-    <div class="login-container">
-
-        <h2>Sistema de laboratorio</h2>
-
-        <form method="POST" action="{% url "users:login" %}"> 
-            {% csrf_token %} 
-
-            <div class="mb-3">
-                <label for="formGroupUser" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="formGroupUser" placeholder="👤"
-                       name="username">
-            </div>
-            <div class="mb-3">
-                <label for="formGroupPassword" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="formGroupPassword" placeholder="🔐"
-                       name="password">
-            </div>
-            <button type="submit" class="btn button_login">Entrada</button>
-        </form>
-
-    </div>
+    <h2>Sistema de laboratorio</h2>
+        <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="formGroupUser" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="formGroupUser" placeholder="👤" name="username">
+        </div>
+        <div class="mb-3">
+            <label for="formGroupPassword" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="formGroupPassword" placeholder="🔐" name="password">
+        </div>
+        <button type="submit" class="btn button_login">Entrada</button>
+    </form>
 
     <div class="particles-container"></div>
 
