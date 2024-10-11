@@ -1,0 +1,72 @@
+body {
+    background-color: #f5f7fa;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4a5568;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: #1a365d;
+    border-radius: 50%;
+    opacity: 0.1;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.85);
+    padding: clamp(30px, 5vw, 20px);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.05),
+        0 1px 8px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(5px);
+}
+
+.button_login {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #1a365d;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-top: 10px;
+}
+
+.button_login:hover {
+    background: #00102f;
+    color: #77ffe7;
+    transform: translateY(-2px);
+}
+
+.button_login:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 1000px) {
+    .login-container {
+        width: 100%;
+        max-width: 100%;
+    }
+}
