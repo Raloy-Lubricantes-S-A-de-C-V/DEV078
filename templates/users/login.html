@@ -11,18 +11,18 @@
             <p class="alert alert-danger">⛔ {{ error }}</p>
         {% endif%}
 
-        <h2>Sistema de laboratorio</h2>
+        <h2>Sistema de laboratorio  <i class="fas fa-flask"></i></h2><br>
             <form method="POST">
             {% csrf_token %}
 
             <div class="mb-3">
-                <label for="formGroupUser" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="formGroupUser" placeholder="👤" name="username">
+                <label for="formGroupUser" class="form-label">Usuario <i class="far fa-user-circle"></i></label> 
+                <input type="text" class="form-control" id="formGroupUser" placeholder="" name="username">
             </div>
 
             <div class="mb-3">
-                <label for="formGroupPassword" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="formGroupPassword" placeholder="🔐" name="password">
+                <label for="formGroupPassword" class="form-label">Contraseña <i class="fas fa-unlock-alt"></i></label> 
+                <input type="password" class="form-control" id="formGroupPassword" placeholder="" name="password">
             </div>
 
             <button type="submit" class="btn button_login">Entrada</button>
