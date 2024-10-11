@@ -1,0 +1,138 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+<title>LOGIN | LABORATORIO</title>
+{% endblock%}
+
+{% block container %}
+
+    {% if error %}
+        <p class="alert alert-danger">{{ error }}</p>
+    {% endif%}
+
+    <div class="login-container">
+
+        <h2>Sistema de laboratorio</h2>
+
+        <form method="POST" action="{% url "users:login" %}"> 
+            {% csrf_token %} 
+
+            <div class="mb-3">
+                <label for="formGroupUser" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="formGroupUser" placeholder="👤"
+                       name="username">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupPassword" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="formGroupPassword" placeholder="🔐"
+                       name="password">
+            </div>
+            <button type="submit" class="btn button_login">Entrada</button>
+        </form>
+
+    </div>
+
+    <div class="particles-container"></div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles-container');
+            const particleCount = window.innerWidth > 768 ? 25 : 15;
+            particlesContainer.innerHTML = '';
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // Posición inicial aleatoria en toda la pantalla
+                const startX = anime.random(0, window.innerWidth);
+                const startY = anime.random(0, window.innerHeight);
+                particle.style.left = `${startX}px`;
+                particle.style.top = `${startY}px`;
+
+                particlesContainer.appendChild(particle);
+
+                const size = anime.random(40, 100);
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Crear animación para cada partícula
+                anime({
+                    targets: particle,
+                    keyframes: [
+                        {
+                            translateX: anime.random(-window.innerWidth/2, window.innerWidth/2),
+                            translateY: anime.random(-window.innerHeight/2, window.innerHeight/2),
+                            duration: anime.random(10000, 15000)
+                        },
+                        {
+                            translateX: anime.random(-window.innerWidth/2, window.innerWidth/2),
+                            translateY: anime.random(-window.innerHeight/2, window.innerHeight/2),
+                            duration: anime.random(10000, 15000)
+                        },
+                        {
+                            translateX: anime.random(-window.innerWidth/2, window.innerWidth/2),
+                            translateY: anime.random(-window.innerHeight/2, window.innerHeight/2),
+                            duration: anime.random(10000, 15000)
+                        }
+                    ],
+                    scale: {
+                        value: [1, 1.5],
+                        duration: 7000,
+                        easing: 'easeInOutSine'
+                    },
+                    opacity: {
+                        value: [0.1, 0.18],
+                        duration: 7000,
+                        easing: 'easeInOutQuad'
+                    },
+                    delay: anime.random(0, 2000),
+                    loop: true,
+                    direction: 'alternate'
+                });
+            }
+        }
+
+        // Crear partículas iniciales
+        createParticles();
+
+        // Animación inicial del contenedor
+        anime({
+            targets: '.login-container',
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 1500,
+            easing: 'easeOutQuad'
+        });
+
+        // Manejar envío del formulario
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            anime({
+                targets: '#submitBtn',
+                scale: [1, 0.95, 1],
+                duration: 800,
+                easing: 'easeInOutQuad'
+            });
+
+            // Efecto de pulso en las partículas al enviar
+            anime({
+                targets: '.particle',
+                scale: 1.8,
+                opacity: 0.22,
+                duration: 1500,
+                easing: 'easeInOutQuad',
+                direction: 'alternate'
+            });
+        });
+
+        // Recrear partículas cuando cambia el tamaño de la ventana
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(createParticles, 250);
+        });
+    </script>
+
+{% endblock %}
