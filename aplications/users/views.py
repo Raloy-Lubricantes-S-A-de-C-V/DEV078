@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from aplications.users.models import Profile
 
 # Datos de conexión a Odoo
 ODOO_URL = 'http://odoo.raloy.com.mx:8069'
@@ -31,9 +32,11 @@ def login_view(request):
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
                 user = User.objects.create_user(username=username, password=password)
+                Profile.objects.create(user=user)
+
+
             user = authenticate(request, username=username, password=password)
 
-            # Iniciar sesión en Django
             if user:
                 login(request, user)
                 return redirect('sampling:feed')
@@ -43,7 +46,6 @@ def login_view(request):
             return render(request, 'users/login.html', {'error': 'El usuario o contraseña es invalido'})
 
     return render(request, 'users/login.html')
-
 
 @login_required
 def logout_view(request):

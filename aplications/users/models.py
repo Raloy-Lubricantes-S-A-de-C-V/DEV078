@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-class UsersModel(models.Model):
-    name = models.CharField(max_length=150, blank=False)
-    email = models.EmailField(max_length = 100, blank=False)
-    is_active = models.BooleanField(default=False)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    level = models.SmallIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.user.username
