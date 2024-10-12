@@ -1,0 +1,10 @@
+.text_color{
+    color: #1a365d;
+}
+
+.neumorphism{
+    border-radius: 10px;
+    background: #e0e0e0;
+    box-shadow: 5px 5px 10px #bebebe,
+    -10px -10px 20px #ffffff;
+}
