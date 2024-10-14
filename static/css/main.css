@@ -1,3 +1,7 @@
+body{
+    background: #fafafa;
+}
+
 .text_color{
     color: #1a365d;
 }
@@ -8,3 +12,47 @@
     box-shadow: 5px 5px 10px #bebebe,
     -10px -10px 20px #ffffff;
 }
+
+.btn-neumorphism-dng {
+    background: linear-gradient(145deg, #da006f, #d00002);
+    border: none; /* Quita el borde */
+    border-radius: 30px;
+    color: white;
+    padding: 5px 15px; /* Ajuste del tamaño para hacerlo más pequeño */
+    font-size: 12px; /* Fuente más pequeña */
+    box-shadow: 5px 5px 10px #bebebe,
+    -10px -10px 20px #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-neumorphism-dng:active {
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.1),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.7);
+}
+
+.btn-neumorphism-dng:hover {
+    background: linear-gradient(145deg, #007d91, #ff1742);
+}
+
+.btn-neumorphism-pry {
+    background: linear-gradient(145deg, #0c83ff, #0571e3);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    padding: 5px 15px;
+    font-size: 10px; /
+    box-shadow: 5px 5px 10px #bebebe,
+    -10px -10px 20px #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-neumorphism-pry:active {
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.1),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.7);
+}
+
+.btn-neumorphism-pry:hover {
+    background: linear-gradient(145deg, #0081ce, #0070e2);
+    color: #d1fff9;
+}
+

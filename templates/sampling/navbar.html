@@ -16,9 +16,11 @@
         <li class="nav-item">
           <a class="nav-link" href="#"></a>
         </li>
-
-         <li class="d-flex" role="search">
-            <a href="{% url "users:logout" %}" class="btn btn-outline-danger">Salir</a>
+      </ul>
+      <!-- Aquí añadimos ms-auto para alinear el botón a la derecha -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="{% url 'users:logout' %}" class="btn btn-neumorphism-dng">Salir</a>
         </li>
       </ul>
     </div>

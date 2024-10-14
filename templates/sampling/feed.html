@@ -6,10 +6,17 @@
 
 
 {% block container %}
-    <h1> WELCOME </h1>
-    <li class="nav-item nav-icon">
-                    <a href="{% url "users:logout" %}">
-                        <i class="fas fa-angle-left"></i> Salir
-                    </a>
-    </li>
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-12">
+                 <h4>Bienvenido {{ request.user }}</h4>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-neumorphism-pry">Crear Muestra</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
