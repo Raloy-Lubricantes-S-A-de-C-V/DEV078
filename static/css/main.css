@@ -31,7 +31,8 @@ body{
 }
 
 .btn-neumorphism-dng:hover {
-    background: linear-gradient(145deg, #007d91, #ff1742);
+    background: linear-gradient(145deg, #91000c, #ff1742);
+    color: white;
 }
 
 .btn-neumorphism-pry {

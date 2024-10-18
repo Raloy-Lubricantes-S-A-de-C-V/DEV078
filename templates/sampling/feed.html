@@ -9,13 +9,13 @@
     <div class="container p-4">
         <div class="row">
             <div class="col-12">
-                 <h4>Bienvenido {{ request.user }}</h4>
+                 <p>Bienvenido {{ request.user }}</p>
             </div>
         </div>
     
         <div class="row">
             <div class="col-12">
-                <button type="button" class="btn btn-neumorphism-pry">Crear Muestra</button>
+                <a href="{% url 'sampling:create_sampling' %}" type="button" class="btn btn-neumorphism-pry">Crear Muestra</a>
             </div>
         </div>
     </div>

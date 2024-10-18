@@ -9,4 +9,10 @@ path(
     name='feed'
 ),
 
+path(
+    route='create_sampling/',
+    view=views.create_sampling_view,
+    name='create_sampling'
+),
+
 ]
