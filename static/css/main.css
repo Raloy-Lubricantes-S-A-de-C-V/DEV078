@@ -57,3 +57,138 @@ body{
     color: #d1fff9;
 }
 
+/* Estilos generales del contenedor */
+.container_create {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilos para las tarjetas */
+.sampling-card {
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05), -10px -10px 15px rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+}
+
+.sampling-card .card-header {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilos para las etiquetas */
+.form-label {
+    font-size: 0.8rem; /* Tamaño más pequeño para las etiquetas */
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* Estilos para los inputs */
+.sampling-input, .template-input {
+    padding: 4px 8px;
+    font-size: 0.75rem; /* Tamaño de texto reducido */
+    border-radius: 5px;
+    border: 1px solid #efefef;
+    height: 30px; /* Altura ajustada */
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), -3px -3px 5px rgba(255, 255, 255, 0.7);
+    background-color: #ffffff;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.sampling-input:focus, .template-input:focus {
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15), -3px -3px 5px rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+
+/* Para hacer el formulario compacto */
+.row {
+    margin-bottom: 10px;
+}
+
+.col-md-4, .col-md-6 {
+    padding: 0 10px;
+}
+
+/* Ajustes de la tabla */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espaciado entre filas */
+}
+
+.table-striped tbody tr {
+    background: #ffffff;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05), -3px -3px 5px rgba(255, 255, 255, 0.8);
+}
+
+.table-striped th, .table-striped td {
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 0.75rem; /* Tamaño más pequeño para el texto en la tabla */
+    border: none;
+}
+
+/* Botones pequeños */
+.btn {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-sm {
+    padding: 2px 8px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .col-md-4, .col-md-6 {
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    .sampling-input, .template-input {
+        width: 100%;
+    }
+}
+
+

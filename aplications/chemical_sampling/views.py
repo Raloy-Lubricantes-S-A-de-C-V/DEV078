@@ -50,4 +50,6 @@ def create_sampling_view(request):
     return render(request, 'sampling/create.html', {
         'sampling_form': sampling_form,
         'formset': formset,
+        'user': request.user,
+        'profile': request.user.profile
     })
