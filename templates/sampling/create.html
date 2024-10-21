@@ -6,123 +6,117 @@
 
 {% block container %}
     <div class="container_create">
-    <h2 class="mb-4">Crear Muestreo</h2>
+        <h2 class="mb-4">Crear Muestreo</h2>
 
-    <form id="create-sampling-form" method="POST">
-        {% csrf_token %}
-        <!-- Formulario principal de ModelChemicalSampling -->
-        <div class="sampling-card">
-            <div class="card-header">
-                Información de Muestreo
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_user">Usuario</label>
-                        <input class="sampling-input" type="text" id="id_user" name="user" value="{{ user.pk}}">
+        <!-- Formulario principal -->
+        <form id="create-sampling-form" method="POST">
+            {% csrf_token %}
+            
+            <!-- Información de Muestreo -->
+            <div class="sampling-card">
+                <div class="card-header">Información de Muestreo</div>
+                <div class="card-body">
+                    <div class="row">
+                        
+                        <input type="hidden" name="user" value="{{ user.pk}}" />
+                        <input type="hidden" name="profile" value="{{ profile.pk }}" />
+                        
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_type_test">Tipo de Prueba</label>
+                            <input type="text" class="sampling-input" name="type_test" id="id_type_test">
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_profile">Perfil</label>
-                        <input class="sampling-input" type="text" id="id_profile" name="profile" value="{{ profile.pk }}">
+                     <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_analyst_request">Solicitante</label>
+                            <input type="text" class="sampling-input" name="analyst_request" id="id_analyst_request">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_priority">Prioridad</label>
+                            <input type="text" class="sampling-input" name="priority" id="id_priority">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_id_template">ID Plantilla</label>
+                            <input type="number" class="sampling-input" name="id_template" id="id_id_template">
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_type_test">Tipo de Prueba</label>
-                        <input class="sampling-input" type="text" id="id_type_test" name="type_test">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_analyst_request">Solicitante</label>
-                        <input class="sampling-input" type="text" id="id_analyst_request" name="analyst_request">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_priority">Prioridad</label>
-                        <input class="sampling-input" type="text" id="id_priority" name="priority">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_id_template">ID Plantilla</label>
-                        <input class="sampling-input" type="text" id="id_id_template" name="id_template">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_templates">Plantillas</label>
-                        <input class="sampling-input" type="text" id="id_templates" name="templates">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_product_db">Producto DB</label>
-                        <input class="sampling-input" type="text" id="id_product_db" name="product_db">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_description">Descripción</label>
-                        <input class="sampling-input" type="text" id="id_description" name="description">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label" for="id_method">Método</label>
-                        <input class="sampling-input" type="text" id="id_method" name="method">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="id_state">Estado</label>
-                        <input class="sampling-input" type="text" id="id_state" name="state">
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Plantillas de Pruebas -->
-        <div class="sampling-card">
-            <div class="card-header">
-                Plantillas de Pruebas
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_templates">Plantillas</label>
+                            <input type="text" class="sampling-input" name="templates" id="id_templates">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_product_db">Producto DB</label>
+                            <input type="text" class="sampling-input" name="product_db" id="id_product_db">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="id_description">Descripción</label>
+                            <input type="text" class="sampling-input" name="description" id="id_description">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="id_method">Método</label>
+                            <input type="text" class="sampling-input" name="method" id="id_method">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="id_state">Estado</label>
+                            <input type="text" class="sampling-input" name="state" id="id_state">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>T Número</th>
-                            <th>Nombre Prueba</th>
-                            <th>Tiempo Prueba</th>
-                            <th>ASTM D</th>
-                            <th>Valor Mínimo</th>
-                            <th>Valor Recurrente</th>
-                            <th>Valor Máximo</th>
-                            <th>Resultado</th>
-                            <th>Precio Unitario</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="formset-container">
-                        {% for form in formset %}
-                            <tr class="form-template">
-                                <td><input type="text" name="t_number" class="template-input"></td>
-                                <td><input type="text" name="test_name" class="template-input"></td>
-                                <td><input type="text" name="test_time" class="template-input"></td>
-                                <td><input type="text" name="astmd" class="template-input"></td>
-                                <td><input type="text" name="min_val" class="template-input"></td>
-                                <td><input type="text" name="recurrent_val" class="template-input"></td>
-                                <td><input type="text" name="max_val" class="template-input"></td>
-                                <td><input type="text" name="val_result" class="template-input"></td>
-                                <td><input type="text" name="price_unit" class="template-input"></td>
-                                <td><button type="button" class="btn btn-danger btn-sm remove-form">Eliminar</button></td>
+
+            <!-- Plantillas de Pruebas -->
+            <div class="sampling-card">
+                <div class="card-header">Plantillas de Pruebas</div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>T Número</th>
+                                <th>Nombre de Prueba</th>
+                                <th>Tiempo de Prueba</th>
+                                <th>ASTM D</th>
+                                <th>Valor Mínimo</th>
+                                <th>Valor Recurrente</th>
+                                <th>Valor Máximo</th>
+                                <th>Resultado</th>
+                                <th>Precio Unitario</th>
+                                <th>Acciones</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody id="formset-container">
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                            <tr class="form-template">
+                                <td><input type="number" name="{{ form.prefix }}-t_number" class="template-input" id="{{ form.prefix }}-t_number"></td>
+                                <td><input type="text" name="{{ form.prefix }}-test_name" class="template-input" id="{{ form.prefix }}-test_name"></td>
+                                <td><input type="text" name="{{ form.prefix }}-test_time" class="template-input" id="{{ form.prefix }}-test_time"></td>
+                                <td><input type="text" name="{{ form.prefix }}-astmd" class="template-input" id="{{ form.prefix }}-astmd"></td>
+                                <td><input type="text" name="{{ form.prefix }}-min_val" class="template-input" id="{{ form.prefix }}-min_val"></td>
+                                <td><input type="text" name="{{ form.prefix }}-recurrent_val" class="template-input" id="{{ form.prefix }}-recurrent_val"></td>
+                                <td><input type="text" name="{{ form.prefix }}-max_val" class="template-input" id="{{ form.prefix }}-max_val"></td>
+                                <td><input type="text" name="{{ form.prefix }}-val_result" class="template-input" id="{{ form.prefix }}-val_result"></td>
+                                <td><input type="number" name="{{ form.prefix }}-price_unit" class="template-input" id="{{ form.prefix }}-price_unit"></td>
+                                <td><button type="button" class="btn btn-danger remove-form">Eliminar</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <!-- Botones -->
-        <div class="d-flex justify-content-between mb-4">
-            <button type="button" id="add-template" class="btn btn-primary btn-sm">Añadir otra plantilla</button>
-            <button type="submit" class="btn btn-success btn-sm">Guardar</button>
-        </div>
-    </form>
-</div>
+            <!-- Botones de acción -->
+            <div class="mb-4">
+                <button type="button" id="add-template" class="btn btn-primary btn-sm">Añadir otra plantilla</button>
+                <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
-
-
-
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -191,5 +185,3 @@
     });
 </script>
 {% endblock %}
-
-
