@@ -11,6 +11,9 @@ ODOO_DB = 'raloy_productivo'
 
 
 def odoo_authenticate(username, password):
+    """
+    Autentica contra Odoo usando XML-RPC. Retorna el UID si la autenticación es exitosa, o None si falla.
+    """
     try:
         common = client.ServerProxy(f'{ODOO_URL}/xmlrpc/2/common')
         uid = common.authenticate(ODOO_DB, username, password, {})
@@ -25,25 +28,32 @@ def login_view(request):
         username = request.POST['username']
         password = request.POST['password']
 
+        # Autenticar contra Odoo
         odoo_user_id = odoo_authenticate(username, password)
 
         if odoo_user_id:
             try:
+                # Verificar si el usuario ya existe en Django
                 user = User.objects.get(username=username)
+                # Si el usuario existe, actualizamos su contraseña en Django para que coincida con la de Odoo
+                user.set_password(password)
+                user.save()
             except User.DoesNotExist:
+                # Si no existe, lo creamos junto con el perfil
                 user = User.objects.create_user(username=username, password=password)
                 Profile.objects.create(user=user)
 
-
+            # Autenticar localmente en Django con la nueva contraseña
             user = authenticate(request, username=username, password=password)
 
             if user:
+                # Iniciar sesión en Django
                 login(request, user)
                 return redirect('sampling:feed')
             else:
                 return render(request, 'users/login.html', {'error': 'Error al autenticar localmente en Django'})
         else:
-            return render(request, 'users/login.html', {'error': 'El usuario o contraseña es invalido'})
+            return render(request, 'users/login.html', {'error': 'El usuario o contraseña es inválido'})
 
     return render(request, 'users/login.html')
 
