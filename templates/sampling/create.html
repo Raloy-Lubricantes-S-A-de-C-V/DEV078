@@ -11,22 +11,22 @@
         <!-- Formulario principal -->
         <form id="create-sampling-form" method="POST">
             {% csrf_token %}
-            
+
             <!-- Información de Muestreo -->
             <div class="sampling-card">
                 <div class="card-header">Información de Muestreo</div>
                 <div class="card-body">
                     <div class="row">
-                        
-                        <input type="hidden" name="user" value="{{ user.pk}}" />
-                        <input type="hidden" name="profile" value="{{ profile.pk }}" />
-                        
+
+                        <input type="hidden" name="user" value="{{ user.pk }}"/>
+                        <input type="hidden" name="profile" value="{{ profile.pk }}"/>
+
                         <div class="col-md-4">
                             <label class="form-label" for="id_type_test">Tipo de Prueba</label>
                             <input type="text" class="sampling-input" name="type_test" id="id_type_test">
                         </div>
                     </div>
-                     <div class="row">
+                    <div class="row">
                         <div class="col-md-4">
                             <label class="form-label" for="id_analyst_request">Solicitante</label>
                             <input type="text" class="sampling-input" name="analyst_request" id="id_analyst_request">
@@ -44,7 +44,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label" for="id_templates">Plantillas</label>
-                            <input type="text" class="sampling-input" name="templates" id="id_templates">
+                            <select id="id_templates" class="sampling-input" name="templates"
+                                    style="width: 100%;"></select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label" for="id_product_db">Producto DB</label>
@@ -75,35 +76,46 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>T Número</th>
-                                <th>Nombre de Prueba</th>
-                                <th>Tiempo de Prueba</th>
-                                <th>ASTM D</th>
-                                <th>Valor Mínimo</th>
-                                <th>Valor Recurrente</th>
-                                <th>Valor Máximo</th>
-                                <th>Resultado</th>
-                                <th>Precio Unitario</th>
-                                <th>Acciones</th>
-                            </tr>
+                        <tr>
+                            <th>T Número</th>
+                            <th>Nombre de Prueba</th>
+                            <th>Tiempo de Prueba</th>
+                            <th>ASTM D</th>
+                            <th>Valor Mínimo</th>
+                            <th>Valor Recurrente</th>
+                            <th>Valor Máximo</th>
+                            <th>Resultado</th>
+                            <th>Precio Unitario</th>
+                            <th>Acciones</th>
+                        </tr>
                         </thead>
                         <tbody id="formset-container">
-                            {{ formset.management_form }}
-                            {% for form in formset %}
+                        {{ formset.management_form }}
+                        {% for form in formset %}
                             <tr class="form-template">
-                                <td><input type="number" name="{{ form.prefix }}-t_number" class="template-input" id="{{ form.prefix }}-t_number"></td>
-                                <td><input type="text" name="{{ form.prefix }}-test_name" class="template-input" id="{{ form.prefix }}-test_name"></td>
-                                <td><input type="text" name="{{ form.prefix }}-test_time" class="template-input" id="{{ form.prefix }}-test_time"></td>
-                                <td><input type="text" name="{{ form.prefix }}-astmd" class="template-input" id="{{ form.prefix }}-astmd"></td>
-                                <td><input type="text" name="{{ form.prefix }}-min_val" class="template-input" id="{{ form.prefix }}-min_val"></td>
-                                <td><input type="text" name="{{ form.prefix }}-recurrent_val" class="template-input" id="{{ form.prefix }}-recurrent_val"></td>
-                                <td><input type="text" name="{{ form.prefix }}-max_val" class="template-input" id="{{ form.prefix }}-max_val"></td>
-                                <td><input type="text" name="{{ form.prefix }}-val_result" class="template-input" id="{{ form.prefix }}-val_result"></td>
-                                <td><input type="number" name="{{ form.prefix }}-price_unit" class="template-input" id="{{ form.prefix }}-price_unit"></td>
-                                <td><button type="button" class="btn btn-danger remove-form">Eliminar</button></td>
+                                <td><input type="number" name="{{ form.prefix }}-t_number" class="template-input"
+                                           id="{{ form.prefix }}-t_number" required></td>
+                                <td><input type="text" name="{{ form.prefix }}-test_name" class="template-input"
+                                           id="{{ form.prefix }}-test_name" required></td>
+                                <td><input type="text" name="{{ form.prefix }}-test_time" class="template-input"
+                                           id="{{ form.prefix }}-test_time" required></td>
+                                <td><input type="text" name="{{ form.prefix }}-astmd" class="template-input"
+                                           id="{{ form.prefix }}-astmd" required></td>
+                                <td><input type="text" name="{{ form.prefix }}-min_val" class="template-input"
+                                           id="{{ form.prefix }}-min_val"></td>
+                                <td><input type="text" name="{{ form.prefix }}-recurrent_val" class="template-input"
+                                           id="{{ form.prefix }}-recurrent_val"></td>
+                                <td><input type="text" name="{{ form.prefix }}-max_val" class="template-input"
+                                           id="{{ form.prefix }}-max_val"></td>
+                                <td><input type="text" name="{{ form.prefix }}-val_result" class="template-input"
+                                           id="{{ form.prefix }}-val_result"></td>
+                                <td><input type="text" name="{{ form.prefix }}-price_unit" class="template-input"
+                                           id="{{ form.prefix }}-price_unit" required></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger remove-form">Eliminar</button>
+                                </td>
                             </tr>
-                            {% endfor %}
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -116,72 +128,173 @@
             </div>
         </form>
     </div>
+    
+    {% if messages %}
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+{% endif %}
+    
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        console.log("Documento listo, configurando eventos...");
+    <script>
+        $(document).ready(function () {
+            const url_suggestions = '{% url "sampling:templates_lab" %}';
+            const url_details = '{% url "sampling:template_details" %}';
 
-        // Añadir más formularios de templates dinámicamente
-        $('#add-template').click(function () {
-            console.log("Botón 'Añadir otra plantilla' clickeado.");
-
-            const formCount = parseInt($('#id_form-TOTAL_FORMS').val());  // Contador actual de forms
-            const formTemplate = $('.form-template:first').clone();  // Clonamos el primer form
-
-            console.log("Clonando el formulario...");
-            console.log(formTemplate);  // Mostrar el formulario clonado en la consola
-
-            // Actualizamos los nombres y IDs de los campos en el nuevo formulario clonado
-            formTemplate.find(':input').each(function () {
-                const name = $(this).attr('name');
-                const id = $(this).attr('id');
-
-                // Solo aplicar .replace() si name e id están definidos
-                if (name) {
-                    const newName = name.replace(/-\d+-/, `-${formCount}-`);
-                    $(this).attr('name', newName);
+            // Inicializar Select2 para el campo de plantillas
+            $('#id_templates').select2({
+                placeholder: 'Seleccione una plantilla...',
+                ajax: {
+                    url: url_suggestions,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            template_name: params.term  // Término buscado
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.map(template => ({
+                                id: template.name,
+                                text: template.name
+                            }))
+                        };
+                    },
+                    cache: true
                 }
-
-                if (id) {
-                    const newId = id.replace(/-\d+-/, `-${formCount}-`);
-                    $(this).attr('id', newId);
-                }
-
-                // Limpiar los valores
-                $(this).val('');
             });
 
-            formTemplate.find('.remove-form').click(function () {  // Volvemos a agregar el evento de eliminar
-                $(this).closest('.form-template').remove();
+            // Evento que se ejecuta al seleccionar una plantilla
+            $('#id_templates').on('select2:select', function (e) {
+                const selectedTemplate = e.params.data.id;
+
+                // Hacer una solicitud AJAX para obtener los datos de la plantilla seleccionada
+                $.ajax({
+                    url: url_details,
+                    data: {
+                        template_name: selectedTemplate
+                    },
+                    success: function (data) {
+                        console.log("Datos recibidos:", data);  // Verificar los datos recibidos
+
+                        // Verificar si se han recibido datos
+                        if (data.length === 0) {
+                            console.error("No se encontraron datos para esta plantilla.");
+                        } else {
+                            // Mantener los campos de administración
+                            const totalForms = $('#id_form-TOTAL_FORMS').val();
+
+                            // Limpiar el contenedor de formsets antes de crear nuevos, pero no eliminar los campos ocultos
+                            $('#formset-container').find('.form-template').remove();
+
+                            // Establecer el número correcto de formularios según los datos recibidos
+                            let currentFormCount = data.length;
+                            $('#id_form-TOTAL_FORMS').val(currentFormCount);
+
+                            // Iterar sobre los datos y crear formsets para cada registro
+                            data.forEach(function (template, index) {
+                                createFormset(template, index);
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error al cargar los datos de la plantilla:", error);
+                    }
+                });
             });
 
-            $('#formset-container').append(formTemplate);  // Añadimos el nuevo formulario
-            $('#id_form-TOTAL_FORMS').val(formCount + 1);  // Incrementamos el contador total de formularios
+            // Función para crear y llenar los formsets
+            function createFormset(data, index) {
+                const tNumber = (data.t_numbers !== null && data.t_numbers !== undefined) ? data.t_numbers : '';
+                const formTemplate = `
+            <tr class="form-template">
+                <td><input type="number" name="form-${index}-t_number" id="id_form-${index}-t_number" class="template-input" value="${tNumber}" required/></td>
+                <td><input type="text" name="form-${index}-test_name" id="id_form-${index}-test_name" class="template-input" value="${data.test_name || ''}" required/></td>
+                <td><input type="text" name="form-${index}-test_time" id="id_form-${index}-test_time" class="template-input" value="${data.test_time || ''}" required/></td>
+                <td><input type="text" name="form-${index}-astmd" id="id_form-${index}-astmd" class="template-input" value="${data.astmd || ''}" required/></td>
+                <td><input type="text" name="form-${index}-min_val" id="id_form-${index}-min_val" class="template-input" value="${data.min_val || ''}" /></td>
+                <td><input type="text" name="form-${index}-recurrent_val" id="id_form-${index}-recurrent_val" class="template-input" value="${data.recurrent_val || ''}" /></td>
+                <td><input type="text" name="form-${index}-max_val" id="id_form-${index}-max_val" class="template-input" value="${data.max_val || ''}" /></td>
+                <td><input type="text" name="form-${index}-val_result" id="id_form-${index}-val_result" class="template-input" value="${data.val_result || ''}" /></td>
+                <td><input type=text" name="form-${index}-price_unit" id="id_form-${index}-price_unit" class="template-input" value="${data.price_unit || ''}" required/></td>
+                <td><button type="button" class="btn btn-danger remove-form">Eliminar</button></td>
+            </tr>
+        `;
 
-            console.log("Nuevo formulario añadido. Total: " + (formCount + 1));
-        });
+                $('#formset-container').append(formTemplate);
 
-        // Delegación de eventos para eliminar formularios dinámicamente
-        $('#formset-container').on('click', '.remove-form', function () {
-            const formCount = $('.form-template').length;
-
-            if (formCount > 1) {
-                $(this).closest('.form-template').remove();  // Elimina el formulario seleccionado
-                $('#id_form-TOTAL_FORMS').val(formCount - 1);  // Actualizamos el contador total de formularios
-                console.log("Formulario eliminado. Total: " + (formCount - 1));
-            } else {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Atención',
-                    text: 'Debe haber al menos un formulario.'
+                // Asignar evento de eliminación al nuevo botón
+                $('#formset-container').on('click', '.remove-form', function () {
+                    $(this).closest('.form-template').remove();  // Elimina el formulario seleccionado
+                    updateTotalForms();
                 });
             }
+
+            // ------ FORMSET ----- (Agregar nueva plantilla manualmente)
+            $('#add-template').click(function () {
+                // Obtener el número de formularios actual
+                let currentFormCount = parseInt($('#id_form-TOTAL_FORMS').val());
+
+                // Verificar que el contador no sea NaN y comenzar en el valor correcto
+                if (isNaN(currentFormCount)) {
+                    currentFormCount = $('#formset-container tr.form-template').length;
+                }
+
+                // Crear nuevo formset con el siguiente índice
+                const formTemplate = `
+            <tr class="form-template">
+                <td><input type="number" name="form-${currentFormCount}-t_number" id="id_form-${currentFormCount}-t_number" class="template-input" required/></td>
+                <td><input type="text" name="form-${currentFormCount}-test_name" id="id_form-${currentFormCount}-test_name" class="template-input" required/></td>
+                <td><input type="text" name="form-${currentFormCount}-test_time" id="id_form-${currentFormCount}-test_time" class="template-input" required/></td>
+                <td><input type="text" name="form-${currentFormCount}-astmd" id="id_form-${currentFormCount}-astmd" class="template-input" /></td>
+                <td><input type="text" name="form-${currentFormCount}-min_val" id="id_form-${currentFormCount}-min_val" class="template-input" /></td>
+                <td><input type="text" name="form-${currentFormCount}-recurrent_val" id="id_form-${currentFormCount}-recurrent_val" class="template-input" /></td>
+                <td><input type="text" name="form-${currentFormCount}-max_val" id="id_form-${currentFormCount}-max_val" class="template-input" /></td>
+                <td><input type="text" name="form-${currentFormCount}-val_result" id="id_form-${currentFormCount}-val_result" class="template-input" /></td>
+                <td><input type="text" name="form-${currentFormCount}-price_unit" id="id_form-${currentFormCount}-price_unit" class="template-input" required/></td>
+                <td><button type="button" class="btn btn-danger remove-form">Eliminar</button></td>
+            </tr>
+        `;
+
+                $('#formset-container').append(formTemplate);
+
+                // Incrementar el valor de TOTAL_FORMS
+                currentFormCount += 1;
+                $('#id_form-TOTAL_FORMS').val(currentFormCount);
+            });
+
+            // Delegación de eventos para eliminar formularios dinámicamente
+            $('#formset-container').on('click', '.remove-form', function () {
+                $(this).closest('.form-template').remove();  // Elimina el formulario seleccionado
+                updateTotalForms();  // Actualiza el valor de TOTAL_FORMS
+            });
+
+            // Función para actualizar el TOTAL_FORMS
+            function updateTotalForms() {
+                const totalForms = $('#formset-container .form-template').length;
+                $('#id_form-TOTAL_FORMS').val(totalForms);
+            }
+
         });
-    });
-</script>
+
+
+    </script>
+    
 {% endblock %}

@@ -15,4 +15,16 @@ path(
     name='create_sampling'
 ),
 
+# AJAX
+path(
+    'templates/suggestions/',
+    views.TemplateSuggestionsView.as_view(),
+    name='templates_lab'
+),
+
+path('templates/details/',
+     views.TemplateDetailsView.as_view(),
+     name='template_details'
+     ),
+
 ]
